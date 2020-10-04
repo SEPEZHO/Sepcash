@@ -3,6 +3,7 @@
 interface CssExports {
   'Title': string;
   'content': string;
+  'root': string;
   'subTitle': string;
 }
 export const cssExports: CssExports;

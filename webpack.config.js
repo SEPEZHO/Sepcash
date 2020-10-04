@@ -22,7 +22,8 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts|.tsx$/, exclude: /node_modules/, use: [{ loader: "babel-loader" }, { loader: "ts-loader", options: { transpileOnly: true }}]},
-      { test: /\.s[ac]ss$/i, use: [ "style-loader", "css-modules-typescript-loader", { loader: "css-loader", options: { modules: true }}, "sass-loader" ]},
+      { test: (mP) => { return mP.endsWith('.sass') && !mP.endsWith('.module.sass');}, use: ['style-loader', 'css-loader', "sass-loader" ]},
+      { test: /\.module.sass$/, use: [ "style-loader", "css-modules-typescript-loader", { loader: "css-loader", options: { modules: true }}, "sass-loader" ]},
       { test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, use: [{ loader: "file-loader", options: { name: "[name].[ext]", outputPath: "fonts/" }}]}
     ]
   },
