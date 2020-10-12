@@ -7,9 +7,9 @@ import "./Style/Header.sass"
 const Header: React.FC = () => {
   return (
     <Link to="/">
-      <div className={`${s.root} RotateContainer`}>
-        <div className={`${s.content} RotateItem`}>
-          <span className={s.Title}>SEPCASH</span>
+      <div className={`${s.root} rotateContainer`}>
+        <div className={`${s.container} rotateItem`}>
+          <span className={s.title}>SEPCASH</span>
           <span className={s.subTitle}>exchange rates</span>
         </div>
       </div>
