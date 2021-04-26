@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import s from "./Style/Header.module.sass"
-import "./Style/Header.sass"
 
 const Header: React.FC = () => {
   return (

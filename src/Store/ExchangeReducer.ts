@@ -4,7 +4,8 @@ export const initialState = {
     val1: 'USD',
     val2: 'RUB',
     amount: 1
-  }
+  },
+  historyExchange: {},
 }
 
 export function exchangeReducer(state = initialState, action) {
@@ -13,7 +14,9 @@ export function exchangeReducer(state = initialState, action) {
       return { ...state, exchange: action.payload }
     case 'SET_EXCHANGE_PARAMS':
       return { ...state, exchangeParams: action.payload }
-        
+    case 'SET_HISTORY_EXCHANGE':
+      return { ...state, historyExchange: action.payload }
+          
     default:
       return state
   }

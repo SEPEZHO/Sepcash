@@ -1,21 +1,33 @@
-const Exchange = (exchangeParams, setExchange) => {
-  // fetch("https://rapidapi.p.rapidapi.com/query?function=CURRENCY_EXCHANGE_RATE&to_currency="+exchangeParams.val2+"&from_currency="+exchangeParams.val1, {
-  fetch("https://free.currconv.com/api/v7/convert?q="+exchangeParams.val1+"_"+exchangeParams.val2+"&compact=ultra&apiKey=1447043c713439b06ffd", {
+import React from "react";
+import { connect } from "react-redux";
+import { setExchange } from "src/Store/Actions/ExchangeActions";
+
+const Exchange: React.FC = (props) => {
+  fetch("https://api.exchangeratesapi.io/latest?base="+props.exchangeParamsVal1+"&symbols="+props.exchangeParamsVal2, {
     "method": "GET",
-    // "headers": {
-    //   "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-    //   "x-rapidapi-key": "fa90193b39msh782757d5371a9b9p1b6030jsnd2a7c3fda822"
-    // }
   })
   .then(response => response.json())
   .then(response => {
-    setExchange((response[exchangeParams.val1+"_"+exchangeParams.val2]*exchangeParams.amount).toFixed(2))
-    // setExchange(Number(response["Realtime Currency Exchange Rate"]["5. Exchange Rate"])*exchangeParams.amount)
+    props.setExchange(response.rates[props.exchangeParamsVal2].toFixed(2))
   })
   .catch(err => {
     console.log(err)
-    setExchange('Error...')
+    props.setExchange('Error...')
   });
+  return null
 }
 
-export default Exchange
+const mapDispatchToProps = dispatch => {
+  return {
+    setExchange: exchange => dispatch(setExchange(exchange))
+  }
+}
+
+const exchangeCatch = state => {
+  return {
+    exchangeParamsVal1: state.exchangeParams.val1,
+    exchangeParamsVal2: state.exchangeParams.val2
+  }
+}
+
+export default connect(exchangeCatch, mapDispatchToProps)(Exchange)
